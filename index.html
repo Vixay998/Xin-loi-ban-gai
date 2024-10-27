@@ -104,7 +104,7 @@
 </head>
 <body>
   <!-- Container chính -->
-  <div class="container">
+  <div class="container" id="content">
     <h1>Xin lỗi bạn yêu!</h1>
     <p id="forgiveMessage">Tha lỗi cho mình đi mà...</p>
     <p>Mình thực sự xin lỗi vì những gì đã xảy ra. Bạn có thể tha lỗi cho mình không?</p>
@@ -122,19 +122,25 @@
       document.body.appendChild(heart);
     }
 
-    // Khi bấm nút "Tha lỗi", chuyển sang trang cảm ơn
+    // Khi bấm nút "Tha lỗi", thay đổi nội dung trang thành lời cảm ơn
     document.getElementById("forgiveBtn").onclick = function() {
-      document.body.innerHTML = `
-        <div class="container">
-          <h1>Cảm ơn bạn rất nhiều!</h1>
-          <p id="thankMessage">Mình yêu bạn rất nhiều!</p>
-          <p>Cảm ơn bạn đã tha lỗi cho mình. Mình hứa sẽ luôn yêu thương và trân trọng bạn.</p>
-          <p>Bạn thật sự là người tuyệt vời nhất!</p>
-        </div>
+      document.getElementById("content").innerHTML = `
+        <h1>Cảm ơn bạn rất nhiều!</h1>
+        <p id="thankMessage">Mình yêu bạn rất nhiều!</p>
+        <p>Cảm ơn bạn đã tha lỗi cho mình. Mình hứa sẽ luôn yêu thương và trân trọng bạn.</p>
+        <p>Bạn thật sự là người tuyệt vời nhất!</p>
       `;
-      
-      // Thêm trái tim rơi trên trang cảm ơn
-      for (let i = 0; i < 20; i++) {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.style.setProperty('--i', Math.random())
+    };
+
+    // Nút "Không" di chuyển đến vị trí ngẫu nhiên khi hover
+    document.getElementById("noBtn").onmouseover = function() {
+      const x = Math.floor(Math.random() * (window.innerWidth - this.offsetWidth));
+      const y = Math.floor(Math.random() * (window.innerHeight - this.offsetHeight));
+      this.style.position = "absolute";
+      this.style.left = x + "px";
+      this.style.top = y + "px";
+    };
+  </script>
+</body>
+</html>
+
